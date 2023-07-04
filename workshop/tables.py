@@ -3,9 +3,11 @@ import sqlalchemy as sa
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
+metadata = sa.MetaData()
 
 class User(Base):
     __tablename__ = 'users'
+    metadata = metadata
 
     id = sa.Column(sa.Integer, primary_key=True)
     email = sa.Column(sa.Text, unique=True)
@@ -14,6 +16,7 @@ class User(Base):
 
 class Operation(Base):
     __tablename__ = 'operations'
+    metadata = metadata
 
     id = sa.Column(sa.Integer, primary_key=True)
     user_id = sa.Column(sa.Integer, sa.ForeignKey('users.id'))
